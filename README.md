@@ -29,6 +29,7 @@ Core packages: pusher-js, resend, Google's gemini API, Prisma, Spotify API
    bun dev
    ```
 
+> Learn more about my experience with Daytona in the [Daytona blog](https://dev.to/rohittcodes/my-journey-with-daytona-and-how-i-plan-to-use-it-going-forward-22bb).
 ---
 
 ## ✨ Features  
