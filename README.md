@@ -2,7 +2,7 @@
 
 TheraBot is a mental health chatbot that provides a safe space for users to talk about their mental health and receive support. It is designed to help users feel heard, understood, and supported. TheraBot uses Google's gemini API to provide users with personalized mental health resources and support.
 
-## 🛠️ Technologies
+**🛠️ Technologies**
 Frontend: React.js, Next.js, Tailwind CSS, Shadcn UI
 Database: MySQL
 Authentication: Auth.js
@@ -10,7 +10,7 @@ Core packages: pusher-js, resend, Google's gemini API, Prisma, Spotify API
 
 ---
 
-## 🚀 Getting Started  
+## 🚀 Getting Started
 
 ### Open Using Daytona  
 
@@ -19,7 +19,7 @@ Core packages: pusher-js, resend, Google's gemini API, Prisma, Spotify API
    ```bash  
    daytona create https://github.com/rohittcodes/daytona-therabot
    ```  
-3. ** Create a `.env` File by copying the `.env.example` file and adding your environment variables**:  
+3. **Create a `.env` File by copying the `.env.example` file and adding your environment variables**:  
    ```bash  
    cp .env.example .env
    ```
@@ -45,5 +45,5 @@ Core packages: pusher-js, resend, Google's gemini API, Prisma, Spotify API
 https://github.com/user-attachments/assets/c1c15c55-7f33-4837-bc8c-8fd250781e23
 
 
-## Author
-Connect with rohitt on [X](https://x.com/rohittcodes) and [LinkedIn](https://linkedin.com/in/rohittcodes)
+## About author
+Connect with rohitt on [Twitter/X](https://x.com/rohittcodes) and [LinkedIn](https://linkedin.com/in/rohittcodes).
