@@ -1,12 +1,12 @@
-This repository contains a README file sample for Daytona Samples and the MIT License.
+# Sample Gemini API, Bun, NextJS, and Prisma Application
 
-It can be used as a template to create sample repositories that can be added into [Daytona](https://github.com/daytonaio/daytona).
+TheraBot is a mental health chatbot that provides a safe space for users to talk about their mental health and receive support. It is designed to help users feel heard, understood, and supported. TheraBot uses Google's gemini API to provide users with personalized mental health resources and support.
 
-Once you finish your sample and it gets merged, you can open a PR in the Daytona repo and submit the sample into the [index file](https://github.com/daytonaio/daytona/blob/main/hack/samples/index.json).
-
-# Sample <LANGUAGE/FRAMEWORK>
-
-Sample description
+## 🛠️ Technologies
+Frontend: React.js, Next.js, Tailwind CSS, Shadcn UI
+Database: MySQL
+Authentication: Auth.js
+Core packages: pusher-js, resend, Google's gemini API, Prisma, Spotify API
 
 ---
 
@@ -17,18 +17,33 @@ Sample description
 1. **Install Daytona**: Follow the [Daytona installation guide](https://www.daytona.io/docs/installation/installation/).  
 2. **Create the Workspace**:  
    ```bash  
-   daytona create <SAMPLE_REPO_URL> 
+   daytona create https://github.com/rohittcodes/daytona-therabot
    ```  
-
-... MORE STEPS IF NEEDED ...
-
-4. **Start the Application**:  
+3. ** Create a `.env` File by copying the `.env.example` file and adding your environment variables**:  
    ```bash  
-   command to start the app
-   ```  
+   cp .env.example .env
+   ```
+4. **Start the Application**:  
+   (Daytona will automatically install the dependencies and start the application, but you can also run the following commands manually)  
+   ```bash  
+   bun dev
+   ```
 
 ---
 
 ## ✨ Features  
 
-List of sample features (e.g. realtime chat app, standardized development environment with devcontainers)
+- Safe Space: TheraBot provides a safe space for users to talk about their mental health and receive support.
+- Personalized Support: TheraBot uses Google's gemini API to provide users with personalized mental health resources and support.
+- Spotify Integration: TheraBot integrates with Spotify to provide users with personalized music recommendations based on their mood, emotions, and mental health needs.
+- Secure Authentication: TheraBot uses secure authentication to protect user data and ensure privacy.
+- Real-time Chat: TheraBot provides real-time chat support to help users feel heard, understood, and supported. It uses pusher to provide real-time chat functionality.
+
+## Demo
+[![Therabot](https://img.shields.io/badge/Therabot-131633?style=for-the-badge&link=https://github.com/RohittCodes/therabot/)](https://github.com/RohittCodes/therabot/)
+
+https://github.com/user-attachments/assets/c1c15c55-7f33-4837-bc8c-8fd250781e23
+
+
+## Author
+Connect with rohitt on [X](https://x.com/rohittcodes) and [LinkedIn](https://linkedin.com/in/rohittcodes)
