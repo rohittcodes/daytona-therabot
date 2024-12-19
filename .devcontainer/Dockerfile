@@ -10,6 +10,7 @@ RUN apt-get update && \
     curl \
     sudo \
     git \
+    unzip \
     build-essential \
     python3 \
     && apt-get clean \
