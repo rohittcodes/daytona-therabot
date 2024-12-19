@@ -1,6 +1,6 @@
 {
   "name": "TheraBot Development Container",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+  "dockerFile": "Dockerfile",
   "forwardPorts": [
     3000
   ],
@@ -23,7 +23,8 @@
         "bradlc.vscode-tailwindcss",
         "christian-kohler.path-intellisense",
         "ms-vscode.vscode-typescript-next",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "oven.bun-vscode"
       ]
     }
   },
