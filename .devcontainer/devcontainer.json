@@ -28,5 +28,11 @@
       ]
     }
   },
-  "postCreateCommand": "bun install && bun dev"
+  "postCreateCommand": "bun clean || true && rm -rf node_modules .next bun.lockb || true && bun install",
+  "remoteUser": "root",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "none"
+    }
+  }
 }
