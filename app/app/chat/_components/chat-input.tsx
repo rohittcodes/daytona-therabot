@@ -22,32 +22,49 @@ interface ChatInputProps {
   chatId: string;
 }
 
+type FormData = z.infer<typeof createMessageSchema>;
+
 const ChatInput = ({ chatId }: ChatInputProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof createMessageSchema>>({
+  const form = useForm<FormData>({
     resolver: zodResolver(createMessageSchema),
     defaultValues: {
       content: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof createMessageSchema>) => {
+  const onSubmit = async (values: FormData) => {
+    setIsLoading(true);
+
     try {
-      const data = {
-        values,
+      const response = await axios.post('/api/messages', {
+        content: values.content,
         chatId,
-      };
-        form.reset();
-        setIsLoading(true);
-      axios.post(`/api/messages`, data).then((response) => {
-        if (response.data.error) {
-          console.error(response.data.error);
-        }
-        setIsLoading(false);
       });
+
+      if (response.data.error) {
+        console.error('API Error:', response.data.error);
+        return;
+      }
+
+      form.reset();
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error)) {
+        console.error('Axios Error:', error.response?.data || error.message);
+        // You could also show a toast notification here
+      } else {
+        console.error('Unexpected error:', error);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.handleSubmit(onSubmit)();
     }
   };
 
@@ -65,11 +82,15 @@ const ChatInput = ({ chatId }: ChatInputProps) => {
               name="content"
               render={({ field }) => (
                 <FormItem className="flex-1 h-12">
-                  <Input
-                    {...field}
-                    placeholder="Type a message..."
-                    className="w-full h-full border-none ring-0 focus-visible:ring-0 focus-visible:border-none focus-visible:outline-none ring-offset-0 focus-visible:ring-offset-0"
-                  />
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Type a message..."
+                      disabled={isLoading}
+                      onKeyDown={handleKeyDown}
+                      className="w-full h-full border-none ring-0 focus-visible:ring-0 focus-visible:border-none focus-visible:outline-none ring-offset-0 focus-visible:ring-offset-0"
+                    />
+                  </FormControl>
                 </FormItem>
               )}
             />
@@ -77,9 +98,13 @@ const ChatInput = ({ chatId }: ChatInputProps) => {
               type="submit"
               variant="ghost"
               size="icon"
-              className="flex items-center h-12 w-12"
+              disabled={isLoading}
+              className="flex items-center justify-center h-12 w-12"
             >
-              <SendHorizonal size={24} />
+              <SendHorizonal 
+                size={24} 
+                className={isLoading ? "opacity-50 animate-pulse" : ""}
+              />
             </Button>
           </div>
         </form>

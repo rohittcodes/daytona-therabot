@@ -23,7 +23,14 @@ Core packages: pusher-js, resend, Google's gemini API, Prisma, Spotify API
    ```bash  
    cp .env.example .env
    ```
-4. **Start the Application**:  
+4. Generate Prism Client and Push the schema to the database:   
+   ```bash  
+   npx prisma generate
+   ```
+   ```bash
+   npx prisma db push
+   ```
+5. **Start the Application**:  
    (Daytona will automatically install the dependencies and start the application, but you can also run the following commands manually)  
    ```bash  
    bun dev
