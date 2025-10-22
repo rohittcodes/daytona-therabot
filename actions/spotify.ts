@@ -1,42 +1,67 @@
 "use server";
 
 export const fetchSpotifyProfile = async (token: string) => {
+    if (!token) {
+        throw new Error("No token provided");
+    }
+
     const response = await fetch("https://api.spotify.com/v1/me", {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     });
 
+    if (!response.ok) {
+        const error = await response.json().catch(() => null);
+        throw new Error(error?.error?.message || `Failed to fetch profile: ${response.status}`);
+    }
+
     return response.json();
 }
 
 export const fetchSpotifyPlaylists = async (token: string) => {
+    if (!token) {
+        throw new Error("No token provided");
+    }
     
     const playlistsToFetch = [
-        "37i9dQZF1DWZqd5JICZI0u",
-        "37i9dQZF1DWXe9gFZP0gtP",
-        "37i9dQZF1DX9uKNf5jGX6m",
-        "37i9dQZF1DXdzGIPNRTvyN",
-        "37i9dQZF1DXebxttQCq0zA",
-        "37i9dQZF1DXaPleDxjpDoo",
-        "37i9dQZF1DX4Oe8zprVH3z",
-    ]
+        "3ksy3Zso4vdt4JIzTYvpF9",
+        "6gCC8kozvUlLGTzl2YO2MR"
+    ];
 
-    const playlists = playlistsToFetch.map(async (playlistId) => {
-        const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    try {
+        const playlists = await Promise.all(
+            playlistsToFetch.map(async (playlistId) => {
+                try {
+                    const response = await fetch(
+                        `https://api.spotify.com/v1/playlists/${playlistId}`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    );
 
-        return response.json();
-    });
-    
-    // return array by resolving all promises
-    
-    const resolvedPlaylists = await Promise.all(playlists);
-
-    // console.log("resolvedPlaylists", resolvedPlaylists);
-
-    return resolvedPlaylists;
+                    if (!response.ok) {
+                        const error = await response.json().catch(() => null);
+                        console.error(
+                            error?.error?.message ||
+                            `Failed to fetch playlist ${playlistId}: ${response.status}`
+                        );
+                        return null;
+                    }
+        
+                    return response.json();
+                } catch (error) {
+                    console.error(`Error fetching playlist ${playlistId}:`, error);
+                    return null;
+                }
+            })
+        );
+        
+        return playlists.filter(playlist => playlist !== null);
+    } catch (error) {
+        console.error("Error fetching playlists:", error);
+        throw error;
+    }
 }
